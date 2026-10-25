@@ -18,7 +18,7 @@ Each item gives the action, why it matters, and what happened on my run. The min
 **Minute 5: set the Merge approval gate to 1 before the first ticket.**
 - Why: the Merge gate "Requires N approvals of the *diff* before any merge path proceeds" (docs/board/review). Leave it at 0 and nobody has to approve.
 - Where: open your project → **Project settings**. Gates are set per project: "Approval gates, connectors, the repository binding. Per board." (https://www.fredrin.com/docs/settings). Also check the card says Manual merge. Fredrin "merges by itself once checks pass if you let it" (https://www.fredrin.com/vs/nimbalyst).
-- My run: I set it after PR #1, not before. PR #1 merged in 38 s. I reverted it in `facb7d5`. With the gate at 1, PR #2 opened at 17:47:54Z and was still unmerged at 21:47Z, waiting for me. [UPDATE AFTER MERGE: PR #2 merged at __:__Z after my GitHub review]
+- My run: I set it after PR #1, not before. PR #1 merged in 38 s. I reverted it in `facb7d5`. With the gate at 1, PR #2 opened at 17:47:54Z and was still unmerged at 21:47Z, waiting for me. It merged on 2026-10-25 at 15:21:44Z, a minute after my GitHub review.
 
 **Minute 10: write AGENTS.md and point CLAUDE.md at it.**
 - Why: "Point `CLAUDE.md` at it with a symlink and you have one source of truth." (https://www.fredrin.com/docs/memory/writing)
@@ -50,9 +50,9 @@ Each item gives the action, why it matters, and what happened on my run. The min
 - Why: "Reject with a specific constraint rather than a mood." (https://www.fredrin.com/blog/ai-code-review)
 
   Review checklist: every Done means line has pasted proof; nothing invented (names, numbers, claims); no file outside the ticket changed, including AGENTS.md and checks; nothing new loaded or installed; you opened the result yourself. Then merge on GitHub (leave a Comment review); the card moves to Completed.
-- My run: both builds passed every check. The rules made the agent follow the standards, but neither page looked like me. I wrote the look down in DESIGN.md (`abbe230`) and sent the build back with 8 items, each visible in a screenshot (for example "each project's big number shows WITHOUT clicking"). PR #2 then got a rebuild from DESIGN.md (`a46046a`), then a rebuild in the approved design (`fbeb387` on main, `462d5ee` on the PR). [UPDATE AFTER MERGE: final commit and number of send-backs] [UPDATE AFTER MERGE: my GitHub review (link) and merge time]
+- My run: both builds passed every check. The rules made the agent follow the standards, but neither page looked like me. I wrote the look down in DESIGN.md (`abbe230`) and sent the build back with 8 items, each visible in a screenshot (for example "each project's big number shows WITHOUT clicking"). PR #2 then got a rebuild from DESIGN.md (`a46046a`), then a rebuild in the approved design (`fbeb387` on main, `462d5ee` on the PR). More send-backs followed (row order, the theme switch, the Food Pantry tile); the final commit was `09d074c`. I left a Comment review ([link](https://github.com/javierxelias-svg/about-me/pull/2#pullrequestreview-5643839124)), since GitHub doesn't let you approve your own PR, and merged it at 15:21:44Z on 2026-10-25.
 
-**Next:** a weekly watchdog that opens an issue and never merges. [UPDATE AFTER MERGE: live at https://javierxelias-svg.github.io/about-me/ since __]
+**Next:** a weekly watchdog that opens an issue and never merges. The page is live at https://javierxelias-svg.github.io/about-me/ since 2026-10-25.
 
 ## What I'd change in Fredrin
 
