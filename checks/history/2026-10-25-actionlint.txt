@@ -1,0 +1,12 @@
+$ uvx --from actionlint-py actionlint --version
+1.7.12
+installed by downloading from release page
+built with go1.26.1 compiler for darwin/arm64
+$ shellcheck --version
+version: 0.11.0
+$ PATH=<shellcheck-py>:$PATH uvx --from actionlint-py actionlint -verbose .github/workflows/pr-checks.yml
+verbose: Linting .github/workflows/pr-checks.yml
+verbose: Found 0 parse errors in 1 ms for .github/workflows/pr-checks.yml
+verbose: Rule "pyflakes" was disabled: exec: "pyflakes": executable file not found in $PATH
+verbose: Found total 0 errors in 44 ms for .github/workflows/pr-checks.yml
+EXIT=0

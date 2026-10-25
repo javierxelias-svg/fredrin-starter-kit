@@ -1,0 +1,15 @@
+{
+  "note": "Sample rules for the bakery example. Numbers and sentences come from content.md via --content.",
+  "email": "",
+  "numbers": {},
+  "of_pairs": [],
+  "dates": [],
+  "number_words": [],
+  "stale": {},
+  "required_text": ["Rosa's Bakery"],
+  "banned_spellings": ["Rosas Bakery"],
+  "banned_claims": [
+    {"label": "'best in town' claim", "pattern": "\\bbest\\s+(bakery|bread)?\\s*in\\s+(town|the\\s+city)\\b"}
+  ],
+  "source_text": ""
+}

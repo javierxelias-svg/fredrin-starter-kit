@@ -1,0 +1,26 @@
+# Sample page, unchanged: expected PASS
+
+Ran: 2026-10-25 09:26 -0400, from the repo root, Python 3.14.8, Darwin
+Command: python3 checks/verify_page.py examples/sample-page --content examples/sample-page/content.md --facts examples/sample-page/facts.json
+Output, verbatim:
+
+PASS  1. Facts (numbers and claims vs allow-list)  (0 fail, 0 warn)
+PASS  2. Links  (0 fail, 0 warn)
+PASS  3. HTML basics  (0 fail, 0 warn)
+PASS  4. Render (headless Chrome)  (0 fail, 0 warn)
+PASS  5. Contrast (best effort, WARN-only)  (0 fail, 0 warn)
+PASS  6. Size / load weight  (0 fail, 0 warn)
+receipt: checks/receipts/RECEIPT-2026-10-25_092615.md
+exit code: 0
+exit code (shell): 0
+
+Failures and warnings from the receipt (absolute path shortened to <repo>):
+
+## Failures (0)
+
+None.
+
+## Warnings (0) — read these, decide yourself
+
+None.
+

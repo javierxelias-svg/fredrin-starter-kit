@@ -1,0 +1,15 @@
+{
+  "note": "Rules that are not in content.md. Replace every <placeholder>. Numbers, dates and sentences come from content.md, passed with --content.",
+  "email": "<the one email address the page may link to, or leave empty>",
+  "numbers": {},
+  "of_pairs": [],
+  "dates": [],
+  "number_words": [],
+  "stale": {},
+  "required_text": ["<exact spelling of your name or business, accents included>"],
+  "banned_spellings": ["<a common misspelling of it>"],
+  "banned_claims": [
+    {"label": "<a claim the page must never make>", "pattern": "<a regular expression that matches it>"}
+  ],
+  "source_text": ""
+}

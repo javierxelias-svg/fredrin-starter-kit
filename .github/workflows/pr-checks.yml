@@ -1,0 +1,80 @@
+# .github/workflows/pr-checks.yml
+# Runs on every pull request. Four checks for a static site with index.html at
+# the repo root; each later check still runs if an earlier one fails, so one red
+# run shows every problem at once.
+# Needs three config files from this kit: .github/html-validate.json,
+# .github/pa11yci-light.json, .github/pa11yci-dark.json
+# Status: tested locally (red->green); not yet run on GitHub.
+# Uses JavaScript or a CDN on purpose? Delete or edit the first check.
+name: PR checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  site-checks:
+    # Pinned instead of ubuntu-latest: ubuntu-26.04 images exist, and "latest"
+    # will move to them without warning.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: No JavaScript, nothing loaded from other sites
+        run: |
+          test -f index.html || { echo "::error::index.html not found"; exit 1; }
+          q='["'"'"']?'
+          bad=0
+          if grep -rnHiE --include='*.html' '<script' .; then echo "::error::<script> found. This site is meant to be zero-JS."; bad=1; fi
+          if grep -rnHiE --include='*.html' "[[:space:]]src[[:space:]]*=[[:space:]]*${q}(https?:)?//" .; then echo "::error::src= loads from another site."; bad=1; fi
+          if grep -rnHiE --include='*.html' "<link[^>]*[[:space:]]href[[:space:]]*=[[:space:]]*${q}(https?:)?//" .; then echo "::error::<link href> loads from another site."; bad=1; fi
+          if grep -rnHiE --include='*.css' "(url\(|@import)[[:space:]]*${q}(https?:)?//" .; then echo "::error::CSS loads from another site."; bad=1; fi
+          if [ "$bad" -eq 0 ]; then echo "OK: no <script>, nothing loaded from another site."; fi
+          exit "$bad"
+
+      - name: Set up Node
+        if: ${{ !cancelled() }}
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24.14.1
+
+      - name: HTML validation (html-validate)
+        if: ${{ !cancelled() }}
+        run: git ls-files -z '*.html' | xargs -0 npx --yes html-validate@11.17.0 --config .github/html-validate.json --formatter stylish
+
+      - name: Link check (lychee, LinkedIn and mailto skipped)
+        if: ${{ !cancelled() }}
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          lycheeVersion: v0.24.2
+          args: >-
+            --no-progress
+            --max-retries 3
+            --timeout 20
+            --include-fragments
+            --exclude 'linkedin\.com'
+            './**/*.html'
+          fail: true
+
+      # Tests the page twice: light theme, then dark theme. Without the
+      # preferredColorScheme flag Chrome picks whatever the machine prefers.
+      - name: Accessibility (pa11y-ci, axe + HTML_CodeSniffer, WCAG 2 AA, light + dark)
+        if: ${{ !cancelled() }}
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/dev/null 2>&1 &
+          for _ in $(seq 1 20); do curl -fs -o /dev/null http://127.0.0.1:8080/index.html && break; sleep 0.5; done
+          rc=0
+          echo "--- light theme"; npx --yes pa11y-ci@5.0.0 --config .github/pa11yci-light.json || rc=1
+          echo "--- dark theme";  npx --yes pa11y-ci@5.0.0 --config .github/pa11yci-dark.json  || rc=1
+          exit "$rc"

@@ -1,0 +1,11 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "timeout": 30000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--blink-settings=preferredColorScheme=0"]
+    }
+  },
+  "urls": ["http://127.0.0.1:8080/index.html"]
+}
