@@ -17,7 +17,7 @@ Each item gives the action, why it matters, and what happened on my run. The min
 
 **Minute 5: set the Merge approval gate to 1 before the first ticket.**
 - Why: the Merge gate "Requires N approvals of the *diff* before any merge path proceeds" (docs/board/review). Leave it at 0 and nobody has to approve.
-- Where: gates are project settings (https://www.fredrin.com/docs/settings) [Javier: your click path]. Also check the card says Manual merge. Fredrin "merges by itself once checks pass if you let it" (https://www.fredrin.com/vs/nimbalyst).
+- Where: open your project → **Project settings**. Gates are set per project: "Approval gates, connectors, the repository binding. Per board." (https://www.fredrin.com/docs/settings). Also check the card says Manual merge. Fredrin "merges by itself once checks pass if you let it" (https://www.fredrin.com/vs/nimbalyst).
 - My run: I set it after PR #1, not before. PR #1 merged in 38 s. I reverted it in `facb7d5`. With the gate at 1, PR #2 opened at 17:47:54Z and was still unmerged at 21:47Z, waiting for me. [UPDATE AFTER MERGE: PR #2 merged at __:__Z after my GitHub review]
 
 **Minute 10: write AGENTS.md and point CLAUDE.md at it.**
