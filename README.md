@@ -72,6 +72,6 @@ Copy in this order. Commit steps 1 to 4 to `main` yourself, before the first tic
 4. `templates/github/` → `.github/` in your repo (the `pr-checks.yml` workflow and its three `.json` configs). Tested locally (red→green); not yet run on GitHub. Then protect `main` (Minute 30).
 5. Tickets: `templates/TICKET.md`. Before merging: `templates/REVIEW-CHECKLIST.md`. Sending back: `templates/SEND-BACK.md`.
 
-`examples/sample-page/` passes the checker and its `broken.html` fails it (outputs in `checks/history/`). Worked example: [about-me](https://github.com/javierxelias-svg/about-me).
+`examples/sample-page/` passes the checker and its `broken.html` fails it (outputs in `checks/history/`). Try it: `python3 checks/verify_page.py examples/sample-page --content examples/sample-page/content.md --facts examples/sample-page/facts.json`. Worked example: [about-me](https://github.com/javierxelias-svg/about-me).
 
 Drafted with Claude, checked and decided by me.
