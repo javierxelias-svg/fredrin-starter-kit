@@ -69,7 +69,7 @@ Copy in this order. Commit steps 1 to 4 to `main` yourself, before the first tic
 1. `templates/content.md` → `content.md` at your repo root. Write your facts first.
 2. `templates/AGENTS.md` → `AGENTS.md`, then `ln -s AGENTS.md CLAUDE.md`. If the look matters, `templates/DESIGN.md` → `DESIGN.md`.
 3. `checks/verify_page.py` and `checks/facts.json` → `checks/`. Fill `facts.json`, run it before any page exists, save the failure in `checks/history/`. It checks static HTML; for anything else, use your own check that fails first.
-4. `.github/workflows/pr-checks.yml` and the three `.github/*.json` configs → same paths. Tested locally (red→green); not yet run on GitHub. Then protect `main` (Minute 30).
+4. `templates/github/` → `.github/` in your repo (the `pr-checks.yml` workflow and its three `.json` configs). Tested locally (red→green); not yet run on GitHub. Then protect `main` (Minute 30).
 5. Tickets: `templates/TICKET.md`. Before merging: `templates/REVIEW-CHECKLIST.md`. Sending back: `templates/SEND-BACK.md`.
 
 `examples/sample-page/` passes the checker and its `broken.html` fails it (outputs in `checks/history/`). Worked example: [about-me](https://github.com/javierxelias-svg/about-me).
